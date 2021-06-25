@@ -5,7 +5,8 @@
 
 set -xeo pipefail
 
-BROWSER_URL="${MEETING_URL}&record=true"
+# BROWSER_URL="${MEETING_URL}&record=true"
+BROWSER_URL="${MEETING_URL}"
 SCREEN_WIDTH=${RECORDING_SCREEN_WIDTH:-'1280'}
 SCREEN_HEIGHT=${RECORDING_SCREEN_HEIGHT:-'720'}
 SCREEN_RESOLUTION=${SCREEN_WIDTH}x${SCREEN_HEIGHT}
@@ -67,6 +68,12 @@ firefox \
   &
 sleep 0.5  # Ensure this has started before moving on
 xdotool mousemove 1 1 click 1  # Move mouse out of the way so it doesn't trigger the "pause" overlay on the video tile
+
+# https://webrtc.github.io/samples/src/content/devices/multi/
+# window_id=`xdotool search --sync --name "Mozilla Firefox"`
+# xdotool windowactivate --sync $window_id key Tab Tab Tab Tab Tab Tab space
+# sleep 2
+# xdotool mousemove 700 350 click 1
 
 exec node /recording/record.js ${S3_BUCKET_NAME} ${SCREEN_WIDTH} ${SCREEN_HEIGHT}
 
