@@ -56,6 +56,8 @@ EOF
 # argument list or else only a white screen will result in the capture for some
 # reason.
 
+uname -m
+
 firefox \
   -P foo4 \
   --width ${SCREEN_WIDTH} \
